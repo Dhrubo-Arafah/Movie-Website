@@ -1,0 +1,49 @@
+<style>
+        #slide-image {
+            display: block;
+            max-width: 1920px;
+            max-height: 650px;
+            filter: brightness(40%);
+        }
+    </style>
+<div id="carouselExampleDark" class="carousel carousel-light slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        {% for file in files %}
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="{{ file.id }}" class="{% if forloop.first%}active{% endif %}"
+                aria-current="true" aria-label="Slide 1" id="slide-navigator"></button>
+        {% endfor %}
+    </div>
+
+    <div class="carousel-inner">
+        {% for file in files %}
+            <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %}" data-bs-interval="20000">
+                <img src="{{ file.banner.url }}" class="d-block w-100" id="slide-image">
+                <div class="carousel-caption d-none d-md-block mb-5" id="slide-content">
+                    <div id="slider-logo">
+                    <img src="{{ file.logo.url }}" alt="{{ file.title }}">
+                        </div>
+                    <br><br><br>
+                    <h3>{{ file.title }}</h3>
+                    <p>{{ file.release }} | {{ file.time }} | {{ file.category }}</p>
+                    <p>{{ file.description }}</p>
+                   {% if request.user.is_authenticated %}
+                     <a href="{{ file.trailer }} download"><i class="fas fa-play"></i></a>
+                    <a href="{{ file.file }} download"><i class="fas fa-film"></i></a>
+                    {% endif %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% include 'sidebar.html' %}

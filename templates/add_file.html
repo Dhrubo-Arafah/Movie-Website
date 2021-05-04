@@ -1,0 +1,13 @@
+{% extends 'main.html' %}
+{% block title %}Upload File{% endblock %}
+{% block content %}
+    <div class="main">
+        <div class="content-container">
+    <form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        {{ items.as_p }}
+        <input type="submit" value="Add File">
+    </form>
+        </div>
+    </div>
+{% endblock %}

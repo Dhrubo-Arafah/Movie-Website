@@ -1,0 +1,11 @@
+{% extends 'main.html' %}
+{% block title %}{{ file.category }}{% endblock %}
+{% block content %}
+    <div class="main">
+        <div class="content-container">
+    {% for file in files %}
+        <a href="\watch\{{ file.id }}"><img src="{{ file.thumbnail.url }}" alt="{{ file.title }}"></a>
+    {% endfor %}
+        </div>
+    </div>
+{% endblock %}

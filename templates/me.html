@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}{{ user.username }}{% endblock %}
+{% block content %}
+    <style>
+        #btn-danger {
+            background: red;
+            color: white;
+        }
+    </style>
+    <div class="main">
+        <div class="content-container">
+            <p>Profile Picture: </p>
+            {% if request.user.profile.picture %}
+                <img src="{{ user.profile.picture.url }}" alt="{{ user.username }}" style="width: 360px; height:480px">
+            {% else %}
+                <img style="width: 360px; height:400px;"
+                     src="{% static 'images/dummy.jpg' %}" alt="">
+            {% endif %}
+
+            <p>ID: {{ user.id }}</p>
+            <p>First Name: {{ request.user.first_name }}</p>
+            <p>Last Name: {{ request.user.last_name }}</p>
+            <p>Username: {{ user.username }}</p>
+            <p>Email : {{ user.email }}</p>
+            <p>Password: {{ user.password }}</p>
+            <br><br>
+            <a id="btn-danger" class="btn btn-danger m-5" href="{% url 'update-profile' %}">Update Profile</a>
+        </div>
+    </div>
+{% endblock %}

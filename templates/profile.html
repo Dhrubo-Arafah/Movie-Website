@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+{% block content %}
+    <style>
+    #btn-danger{
+        background: red;
+        color: white;
+    }
+    </style>
+    <div class="main">
+        <div class="content-container">
+<form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in form %}
+        {{ field.label }}<br>
+            {{ field }}<br><br>
+        {% endfor %}
+{% for field in profile_form %}
+        {{ field.label }}<br>
+            {{ field }}<br><br>
+        {% endfor %}
+
+        <input type="submit" id="btn-danger" class="btn btn-danger" value="Update Profile">
+    </form>
+        </div>
+    </div>
+{% endblock %}

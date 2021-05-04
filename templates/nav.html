@@ -1,0 +1,54 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light bg">
+    <div class="container">
+        <a class="navbar-brand p-2" id="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" style="padding: 10px 0; max-width: 80px; max-height: 80px" alt=""></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            {% if request.user.is_authenticated %}
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        {% if request.user.profile.picture %}
+
+                         <img class="profile-picture"
+                             src="{{ request.user.profile.picture.url }}" alt="">
+                            {% else %}
+                            <img class="profile-picture"
+                             src="{% static 'images/dummy.jpg' %}" alt="">
+                        {% endif %}
+                    </a>
+
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="profile">
+                        <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+                        <li><a class="dropdown-item" href="{% url 'update-profile' %}">Update Profile</a></li>
+                        {% if request.user.is_superuser %}
+                        <li><li><a class="dropdown-item" href="{% url 'add_file' %}">Add File</a></li></li>
+                        {% endif %}
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                    </ul>
+                </li>
+            {% else %}
+                <div class="btn-grp ms-auto">
+                    <p>UNLIMITED TV SHOWS & MOVIES</p>
+                    <a href="{% url 'register' %}">JOIN NOW</a>
+                    <a href="{% url 'login' %}" id="signin">SIGN IN</a>
+                </div>
+            {% endif %}
+            <div class="toggle">
+                <i class="fas fa-moon toggle-icon"></i>
+                <i class="fas fa-sun toggle-icon"></i>
+                <div class="toggle-ball"></div>
+            </div>
+            </ul>
+        </div>
+    </div>
+</nav>

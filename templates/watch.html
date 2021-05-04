@@ -1,0 +1,49 @@
+{% extends 'main.html' %}
+{% block title %}{{ file.title }}{% endblock %}
+{% block content %}
+    {% include 'sidebar.html' %}
+    <style>
+    #btn-danger{
+        background: red;
+        color: white;
+    }
+    </style>
+    <div class="content-container">
+        <div class="main">
+            <div style="
+                    padding: 50px;
+                    background:  linear-gradient(to right, rgba(0,0,0,1.0), rgba(255,255,255,0.1)), url('{{ file.banner.url }}') no-repeat center;
+                    background-size: cover;
+                    max-width: 1920px;
+                    max-height: 750px;
+                    margin-bottom: 20px;
+                    color: white;
+                    ">
+                <div id="slider-logo">
+                    <img src="{{ file.logo.url }}" alt="{{ file.title }}">
+                </div>
+                <br><br><br>
+                <p style="
+        background: red;
+        color: white;
+        width:150px;
+        font-size: 16px;
+        text-align: center;
+        border-radius: 15px;
+">#{{ file.status }}</p>
+                <h3>{{ file.title }}</h3>
+                <p>{{ file.release }} | {{ file.time }} | {{ file.category }} | {{ file.production }}</p>
+                <p>{{ file.description }}</p>
+                <p>STARRING: {{ file.starring }}</p>
+                <a href="{{ file.trailer }} download"><i class="fas fa-play"></i></a>
+                <a href="{{ file.file }} download"><i class="fas fa-film"></i></a>
+            </div>
+            {% if request.user.is_superuser %}
+                <div class="d-flex align-content-start">
+                <a id="btn-danger" class="btn btn-danger m-5" href="/update-file/{{ file.id }}">Update File</a>
+                <a class="btn btn-danger m-5" id="btn-danger" href="/delete-file/{{ file.id }}">Delete File</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,169 @@
+{% extends 'main.html' %}
+{% block title %}OneClash{% endblock %}
+{% block content %}
+    <div class="main">
+        {% include 'slider.html' %}
+        <div class="content-container">
+            <div class="movie-list-container">
+                <h1 class="movie-list-title" id="heading">NEW RELEASES</h1>
+                <div class="movie-list-wrapper">
+                    <div class="movie-list">
+                        {% for file in files %}
+                            {% if file.status == 'new_releases' %}
+                                <div class="movie-list-item">
+                                    <img class="movie-list-item-img" src="{{ file.thumbnail.url }}" alt="">
+                                    <span><h5 class="movie-list-item-title">{{ file.title }}</h5></span>
+                                    {% if request.user.is_authenticated %}
+                                        <div class="movie-list-item-desc">
+                                            {{ file.description|linebreaks|safe|truncatewords:10 }}
+                                            {% ifnotequal file.description file.description|truncatewords:10 %}
+                                                <a id="readmore" href="\watch\{{ file.id }}">read more...</a>
+                                                <br><br><br><br>
+                                                <div class="movie-list-item-button">
+                                                    <a href="{{ file.trailer }} download"><i
+                                                            class="fas fa-play"></i></a>
+                                                    <a href="{{ file.file }} download"><i class="fas fa-film"></i></a>
+                                                </div>
+                                            {% endifnotequal %}
+                                        </div>
+                                    {% else %}
+                                        <div class="movie-list-item-desc">
+                                            {{ file.description|linebreaks|safe|truncatewords:20 }}
+                                            {% ifnotequal file.description file.description|truncatewords:20 %}
+                                                <a id="readmore" href="\watch\{{ file.id }}">read more...</a>
+                                            {% endifnotequal %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <i class="fas fa-chevron-right arrow"></i>
+                </div>
+            </div>
+        </div>
+
+    <!--Recently Added-->
+    <div class="content-container">
+            <div class="movie-list-container">
+                <h1 class="movie-list-title" id="heading">RECENTLY ADDED</h1>
+                <div class="movie-list-wrapper">
+                    <div class="movie-list">
+                        {% for file in files %}
+                            {% if file.status == 'recently_added' %}
+                                <div class="movie-list-item">
+                                    <img class="movie-list-item-img" src="{{ file.thumbnail.url }}" alt="">
+                                    <span><h5 class="movie-list-item-title">{{ file.title }}</h5></span>
+                                    {% if request.user.is_authenticated %}
+                                        <div class="movie-list-item-desc">
+                                            {{ file.description|linebreaks|safe|truncatewords:10 }}
+                                            {% ifnotequal file.description file.description|truncatewords:10 %}
+                                                <a id="readmore" href="\watch\{{ file.id }}">read more...</a>
+                                                <br><br><br><br>
+                                                <div class="movie-list-item-button">
+                                                    <a href="{{ file.trailer }} download"><i
+                                                            class="fas fa-play"></i></a>
+                                                    <a href="{{ file.file }} download"><i class="fas fa-film"></i></a>
+                                                </div>
+                                            {% endifnotequal %}
+                                        </div>
+                                    {% else %}
+                                        <div class="movie-list-item-desc">
+                                            {{ file.description|linebreaks|safe|truncatewords:20 }}
+                                            {% ifnotequal file.description file.description|truncatewords:20 %}
+                                                <a id="readmore" href="\watch\{{ file.id }}">read more...</a>
+                                            {% endifnotequal %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <i class="fas fa-chevron-right arrow"></i>
+                </div>
+            </div>
+        </div>
+
+    <!--Trending-->
+    <div class="content-container">
+            <div class="movie-list-container">
+                <h1 class="movie-list-title" id="heading">TRENDING</h1>
+                <div class="movie-list-wrapper">
+                    <div class="movie-list">
+                        {% for file in files %}
+                            {% if file.status == 'trending' %}
+                                <div class="movie-list-item">
+                                    <img class="movie-list-item-img" src="{{ file.thumbnail.url }}" alt="">
+                                    <span><h5 class="movie-list-item-title">{{ file.title }}</h5></span>
+                                    {% if request.user.is_authenticated %}
+                                        <div class="movie-list-item-desc">
+                                            {{ file.description|linebreaks|safe|truncatewords:10 }}
+                                            {% ifnotequal file.description file.description|truncatewords:10 %}
+                                                <a id="readmore" href="\watch\{{ file.id }}">read more...</a>
+                                                <br><br><br><br>
+                                                <div class="movie-list-item-button">
+                                                    <a href="{{ file.trailer }} download"><i
+                                                            class="fas fa-play"></i></a>
+                                                    <a href="{{ file.file }} download"><i class="fas fa-film"></i></a>
+                                                </div>
+                                            {% endifnotequal %}
+                                        </div>
+                                    {% else %}
+                                        <div class="movie-list-item-desc">
+                                            {{ file.description|linebreaks|safe|truncatewords:20 }}
+                                            {% ifnotequal file.description file.description|truncatewords:20 %}
+                                                <a id="readmore" href="\watch\{{ file.id }}">read more...</a>
+                                            {% endifnotequal %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <i class="fas fa-chevron-right arrow"></i>
+                </div>
+            </div>
+        </div>
+
+    <!--Must Watch-->
+    <div class="content-container">
+            <div class="movie-list-container">
+                <h1 class="movie-list-title" id="heading">MUST WATCH</h1>
+                <div class="movie-list-wrapper">
+                    <div class="movie-list">
+                        {% for file in files %}
+                            {% if file.status == 'must_watch' %}
+                                <div class="movie-list-item">
+                                    <img class="movie-list-item-img" src="{{ file.thumbnail.url }}" alt="">
+                                    <span><h5 class="movie-list-item-title">{{ file.title }}</h5></span>
+                                    {% if request.user.is_authenticated %}
+                                        <div class="movie-list-item-desc">
+                                            {{ file.description|linebreaks|safe|truncatewords:10 }}
+                                            {% ifnotequal file.description file.description|truncatewords:10 %}
+                                                <a id="readmore" href="\watch\{{ file.id }}">read more...</a>
+                                                <br><br><br><br>
+                                                <div class="movie-list-item-button">
+                                                    <a href="{{ file.trailer }} download"><i
+                                                            class="fas fa-play"></i></a>
+                                                    <a href="{{ file.file }} download"><i class="fas fa-film"></i></a>
+                                                </div>
+                                            {% endifnotequal %}
+                                        </div>
+                                    {% else %}
+                                        <div class="movie-list-item-desc">
+                                            {{ file.description|linebreaks|safe|truncatewords:20 }}
+                                            {% ifnotequal file.description file.description|truncatewords:20 %}
+                                                <a id="readmore" href="\watch\{{ file.id }}">read more...</a>
+                                            {% endifnotequal %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <i class="fas fa-chevron-right arrow"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
